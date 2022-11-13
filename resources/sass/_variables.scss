@@ -1,5 +1,5 @@
 // Body
-$body-bg: #f3ebdd;
+$body-bg: #f7f5e0;
 
 
 
@@ -10,4 +10,30 @@ $line-height-base: 1.6;
 
 $warning: #F9DA07;
 $light:#7cb71e;
+//$info:#c7e9a7;
+$info:#ecef86;
+//#74d81c9d
+$primary:#fafaf7;
 
+.carousel-item {
+    height: 65vh;
+    min-height: 300px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color: rgb(152, 151, 147);
+  }
+
+  .rounded-circle{
+    width: 40px;
+    height: 140px;
+  }
+
+  .nav-pedidos{
+    background-color: #c7e9a7;
+  }
+  .pestana-bg{
+    background-color: #A39305;
+  }

@@ -16,18 +16,15 @@
             <div class="collapse navbar-collapse justify-content-center " id="navbarScroll" >
             <ul class="navbar-nav my-lg-2 gap-5 " style="--bs-scroll-height: 100px;">
                 <li class="nav-item">
-                <a class="nav-link btn btn-warning " aria-current="page" href="/">Inicio</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link btn btn-warning  active" href="<?=route('sobre_nosotros') ?>">Sobre Nosotros</a>
+                <a class="nav-link btn btn-warning" href="<?=route('sobre_nosotros') ?>">Sobre Nosotros</a>
                 </li>
                 <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle btn btn-warning " href="<?=route('sobre_producto')?>" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle btn btn-warning  active" href="<?=route('sobre_producto')?>" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Producto
                 </a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="<?=route('cotizar') ?>">Cotizar</a></li>
-                    <li><a class="dropdown-item" href="<?=route('pedido') ?>">Pedido</a></li>
+                    <li><a class="dropdown-item " href="<?=route('pedido') ?>">Pedido</a></li>
                         
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="<?=route('sobre_producto') ?>">sobre el producto</a></li>
@@ -42,7 +39,7 @@
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
+                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 btn btn-warning">Inicio</a>
                     @else
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline btn btn-warning" >Log in</a>
 
@@ -53,12 +50,55 @@
                 </div>
             @endif
         </div>
+         <!-- Right Side Of Navbar -->
+         <ul class="navbar-nav ms-auto gap-2 ">
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-warning  " href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-warning " href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle btn btn-warning" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
         </nav>
+        <ul class="nav nav-tabs nav-pedidos">
+          <li class="nav-item">
+            <a class="nav-link active text-bg-info" aria-current="page" href="<?=route('pedido') ?>">Crear Pedido</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark text-bg-warning" href="<?=route('mis_pedidos') ?>">Mis Pedidos</a>
+          </li>
+        </ul>
     <h1>Creando Pedido...</h1>
     <div class=" bg-warning" style="width:50%;">
 
     </div>
-    <form action="{{url('/pedido')}}"  method="post"  class="flex-row p-5 bg-light justify-content-center" >
+    <form action="{{url('/pedido')}}"  method="post"  class="flex-row p-5 bg-primary justify-content-center" >
     @csrf
       <div class="col-md-8">
       <label for="cantidad">Ingresa la cantidad que deseas tomando en cuenta las medidas de exportación: </label>
@@ -68,19 +108,19 @@
       <legend class="col-form-label col-sm-2 pt-0">Selecciona la modalidad de tus medidas </legend>
       <div class="col-sm-10">
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="modalidad" id="gridRadios1" value="red con 5 libras" checked>
+          <input class="form-check-input text-bg-secondary" type="radio" name="modalidad" id="gridRadios1" value="red con 5 libras" checked>
           <label class="form-check-label" for="gridRadios1">
             Red de 5 libras
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="modalidad" id="gridRadios2" value="Caja con 10 libras">
+          <input class="form-check-input text-bg-secondary" type="radio" name="modalidad" id="gridRadios2" value="Caja con 10 libras">
           <label class="form-check-label" for="gridRadios2">
            Caja con 10 libras
           </label>
         </div>
         <div class="form-check ">
-          <input class="form-check-input" type="radio" name="modalidad"id="gridRadios3" value="Caja con 40 libras " >
+          <input class="form-check-input text-bg-secondary" type="radio" name="modalidad"id="gridRadios3" value="Caja con 40 libras " >
           <label class="form-check-label" for="gridRadios3">
           Caja con 40 libras 
           </label>
@@ -165,7 +205,7 @@
 
   <div class="col-10">
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck" value=1>
+      <input class="form-check-input " type="checkbox" id="gridCheck" value=1>
       <label class="form-check-label" for="gridCheck">
         Términos y condiciones
       </label>
@@ -174,7 +214,7 @@
   
   
   <div class="col-12">
-    <button type="submit" class="btn btn-primary">Realizar Pedido</button>
+    <button type="submit" class="btn btn-info">Realizar Pedido</button>
   </div>
 </form>
 

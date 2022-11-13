@@ -26,6 +26,11 @@ class User extends Authenticatable
         'password',
     ];
 
+    //08/11/2022
+    public function getIsAdminAttribute(){
+        return $this->user()->where('tipo',1)->exists();
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

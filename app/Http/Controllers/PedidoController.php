@@ -12,13 +12,24 @@ class PedidoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     protected $table='pedido';
     public function index()
     {
         //
-        return view ('pedido.index');
+        $datos['pedido']=Pedido::paginate(5);
+        return view ('pedido.mis_pedidos',$datos);
     }
 
+    
+    /*public function verPedidos(){
+
+        $datos['pedido']=Pedido::paginate(5);
+        return view('admin.pedidos',$datos);
+    }*/
     /**
      * Show the form for creating a new resource.
      *
@@ -84,8 +95,12 @@ class PedidoController extends Controller
      * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pedido $pedido)
+    public function destroy($pedido)//Pedido $pedido
     {
         //
+        Pedido::destroy($pedido);
+        return redirect('mis_pedidos');
+        //{{url('/mis_pedidos/'.$pedido->id)}}
+        //{{method_filed('DELETE')}}
     }
 }

@@ -23,6 +23,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('welcome');
+        /*if(auth()->user()->tipo=='1'){
+            return redirect()->to('admin/index');
+        }
+        else{
+            return redirect()->to('/');
+        }*/
     }
+
+     /*intento
+     public function store(){
+        if(auth()->user()->tipo=='1'){
+            return redirect()->to('admin.index');
+        }
+        else{
+            return redirect()->to('/');
+        }
+    }*/
 }

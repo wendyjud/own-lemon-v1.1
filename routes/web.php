@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PedidoController;
-
+use App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\AuthenticatedSessionController;
@@ -19,7 +19,7 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/inicio', function () {
     return view('welcome');
 });
 
@@ -27,14 +27,15 @@ Route::get('/sobre-nosotros', function () {
     return view('sobre-nosotros');
 });
 
+Route::view('/inicio',"welcome")->name('inicio');
 Route::view('/sobre_nosotros',"sobre_nosotros")->name('sobre_nosotros');
 Route::view('/sobre_producto',"sobre_producto")->name('sobre_producto');
 Route::view('/cotizar',"pedido.cotizar_pedido")->name('cotizar');
-
 Route::view('/contacto',"contacto")->name('contacto');
 
 Route::view('/crear-pedido',"pedido.crear_pedido")->name('pedido');
 
+Route::view('admin/sobre_nosotros',"admin.editar_sobre_nosotros")->name('admin/sobre_nosotros');
 //Route::view('/privada',"secret")->name('privada'); //SOLO SI SE HA INICIADO CORRECTAMENTE LA SESION PODRA VERT ESTA PESTAÑA
 
 Route::get('/pedido', function () {
@@ -46,5 +47,14 @@ Route::get('/pedido', function () {
 Route::resource('pedido',PedidoController::class);
 
 Auth::routes();
+//Agregada solo para tener acceso cuando los usuarios esten logueados
+//Route::get('pedido/crear_pedido', [App\Http\Controllers\PedidoController::class, 'create'])->name('pedido');
+Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('mis_pedidos', [App\Http\Controllers\PedidoController::class, 'index'])->name('mis_pedidos');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin', [AdminController::class, 'index'])
+->middleware('auth.admin')
+->name('admin.index');
+
+//Esta ruta funciona al escribir en el navegador admin/pedidos y mostrar los pedidos
+Route::get('/admin/pedidos', [AdminController::class, 'verPedidos'])->middleware('auth.admin')->name('admin.pedidos.blade');

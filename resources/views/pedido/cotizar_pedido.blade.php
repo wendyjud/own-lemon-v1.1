@@ -18,9 +18,6 @@
             <div class="collapse navbar-collapse justify-content-center " id="navbarScroll" >
                 <ul class="navbar-nav my-lg-2 gap-5 " style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link active btn btn-warning " aria-current="page" href="/">Inicio</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link btn btn-warning " href="<?=route('sobre_nosotros') ?>">Sobre Nosotros</a>
                     </li>
                     <li class="nav-item dropdown">
@@ -41,7 +38,7 @@
             <div class="d-flex gap-2 col-6 justify-content-md-end ">
                     @if (Route::has('login'))
                             @auth
-                                <a href="{{ url('/home') }}" class="btn btn-warning"  >Home</a>
+                                <a href="{{ url('/home') }}" class="btn btn-warning me-md-3"  >Inicio</a>
                             @else
                                 <a href="{{ route('login') }}" class="btn btn-warning me-md-3">Log in</a>
 
@@ -51,11 +48,46 @@
                             @endauth
                     @endif
             </div>
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav ms-auto gap-2 ">
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-warning  " href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-warning " href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle btn btn-warning" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
         </nav>
 
         <h1>Cotiza tus pedidos!</h1>
-        <div class="d-flex justify-content-center bg-light ">
-            <div class="bg-light col-sm-5" >
+        <div class="d-flex justify-content-center bg-primary ">
+            <div class="bg-primary col-sm-4" >
                     <h3 class="text-center">Llena los siguientes datos del formulario:</h3>
                     <div class="row mb-5">
                         <div class="col-sm-12">
@@ -129,7 +161,7 @@
                         <option value="Zacatecas ">Zacatecas</option>
                         </datalist>
                         </div>
-                        <button type="button" class="btn btn-warning">Cotizar</button>
+                        <button type="button" class="btn btn-info">Cotizar</button>
                 </div>
                 
             </div>

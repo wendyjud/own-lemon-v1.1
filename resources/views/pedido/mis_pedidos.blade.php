@@ -1,15 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Contacto</title>
+        <title>Mis pedidos</title>
         @vite(['resources/js/app.js'])
     </head>
-    <body class="antialiased">
-            
-        <nav class="navbar navbar-expand-lg bg-light">
+    <body >
+    <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" disabled >Own Lemon</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,23 +18,23 @@
             <div class="collapse navbar-collapse justify-content-center " id="navbarScroll" >
                 <ul class="navbar-nav my-lg-2 gap-5 " style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link btn btn-warning " href="<?=route('sobre_nosotros') ?>">Sobre Nosotros</a>
+                        <a class="nav-link btn btn-warning " href="<?=route('admin/sobre_nosotros') ?>">Sobre Nosotros</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle btn btn-warning " href="<?=route('sobre_producto')?>" role="button" data-bs-toggle="dropdown" aria-expanded="false">Producto</a>
+                        <a class="nav-link dropdown-toggle btn btn-warning active " href="<?=route('sobre_producto')?>" role="button" data-bs-toggle="dropdown" aria-expanded="false">Producto</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="<?=route('cotizar') ?>">Cotizar</a></li>
-                            <li><a class="dropdown-item " href="<?=route('pedido') ?>">Pedido</a></li>        
+                            <li><a class="dropdown-item" href="<?=route('pedido') ?>">Pedidos</a></li>        
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="<?=route('sobre_producto') ?>">sobre el producto</a></li>
                         </ul>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link  btn btn-warning active"  href="<?=route('contacto') ?>">Contacto</a>
+                        <a class="nav-link  btn btn-warning"  href="<?=route('contacto') ?>">Contacto</a>
                     </li>
                 </ul>
             </div>  
-            </div>
+            </div> </div>
             <div class="d-flex gap-2 col-6 justify-content-md-end ">
                     @if (Route::has('login'))
                             @auth
@@ -47,10 +47,8 @@
                                 @endif
                             @endauth
                     @endif
-            </div>
-
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ms-auto gap-2 ">
+             <!-- Right Side Of Navbar -->
+             <ul class="navbar-nav ms-auto gap-2 ">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -85,60 +83,76 @@
                         @endguest
                     </ul>
         </nav>
-        <div class="container  ">
-        <div class="row align-items-center">
-            <div class="col-md-12">
-                <div class="well well-sm">
-                    <form class="form bg-primary " method="post">
-                        <fieldset>
-                            <legend class="text-center header">Contactános</legend>
-
-                            <div class="form-group  d-flex justify-content-center">
-                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
-                                <div class="col-md-8">
-                                    <input id="fname" name="name" type="text" placeholder="Nombre" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group d-flex justify-content-center">
-                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
-                                <div class="col-md-8">
-                                    <input id="lname" name="name" type="text" placeholder="Apellido" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group d-flex justify-content-center">
-                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
-                                <div class="col-md-8">
-                                    <input id="email" name="email" type="text" placeholder="Correo electrónico" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group d-flex justify-content-center">
-                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
-                                <div class="col-md-8">
-                                    <input id="phone" name="phone" type="text" placeholder="Teléfono de contacto" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group d-flex justify-content-center">
-                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-pencil-square-o bigicon"></i></span>
-                                <div class="col-md-8">
-                                    <textarea class="form-control" id="message" name="message" placeholder="Ingrese su mensaje aqui, nos comunicaremos con usted tan pronto como sea posible" rows="7"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-12 text-center">
-                                    <button type="submit" class="btn btn-info btn-lg">Enviar</button>
-                                </div>
-                            </div>
-                        </fieldset>
+        <ul class="nav nav-tabs nav-pedidos">
+          <li class="nav-item">
+            <a class="nav-link active text-bg-warning" aria-current="page" href="<?=route('pedido') ?>">Crear Pedido</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark text-bg-info" href="<?=route('mis_pedidos') ?>">Mis Pedidos</a>
+          </li>
+        </ul>
+    <h4 class="display-5 text-center">Mis Pedidos </h4>
+    <table class="table  table-primary table table-hover">
+    <thead class="thead-info">
+        <tr class="">
+                <th >#Num Pedido</th>
+                <th >Cantidad</th>
+                <th >Modalidad</th>
+                <th >Nombre</th>
+                <th >Apellido</th>
+                <th >Tel</th>
+                <th >Calle</th>
+                <th >No.</th>
+                <th >Colonia</th>
+                <th >Estado</th>
+                <th >C. P</th>
+                <th >RFC</th>
+                <th >Fecha</th>
+                <th >Nota</th>
+                <th >Aprobado</th>
+                <th >Editar 
+                    
+                </th>
+                <th >Cancelar
+                    
+                </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($pedido as $pedidos)
+        <tr class="">
+                <td>{{$pedidos->id}}</td>
+                <td>{{$pedidos->cantidad}}</td>
+                <td>{{$pedidos->modalidad}}</td>
+                <td>{{$pedidos->nombre}}</td>
+                <td>{{$pedidos->apellido}}</td>
+                <td>{{$pedidos->tel}}</td>
+                <td>{{$pedidos->calle}}</td>
+                <td>{{$pedidos->num}}</td>
+                <td>{{$pedidos->col}}</td>
+                <td>{{$pedidos->estado}}</td>
+                <td>{{$pedidos->cod_Postal}}</td>
+                <td>{{$pedidos->rfc_Empresa}}</td>
+                <td>{{$pedidos->fecha_Pedido}}</td>
+                <td>{{$pedidos->nota}}</td>
+                <td>{{$pedidos->aprobacion}}</td>
+                <td>
+                <input type="submit" onClick="return  confirm('¿Realmente quieres cancelar el pedido')" value="Editar">
+                </td>
+                <td>
+                <form action="{{url('mis_pedidos/'.$pedidos->id)}}" method="post">
+                            @csrf
+                            {{method_field('DELETE')}}
+                            <input type="submit" onclick="return confirm('¿Realmente quieres cancelar el pedido')" value="Cancelar">
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-      
+                </td>
+        </tr>
+        @endforeach
+    </tbody>
+    
+</table>
+    
+ 
+        
     </body>
 </html>

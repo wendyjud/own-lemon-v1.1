@@ -1,9 +1,7 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
 class CreatePedidoTable extends Migration
 {
     /**
@@ -14,7 +12,7 @@ class CreatePedidoTable extends Migration
     public function up()
     {
         Schema::create('pedido', function (Blueprint $table) {
-            $table->integer('num_Pedido', true);
+            $table->integer('id', true);
             $table->integer('cantidad');
             $table->string('modalidad', 20);
             $table->string('nombre', 20);

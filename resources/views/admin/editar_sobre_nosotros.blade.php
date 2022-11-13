@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Sobre Nosotros</title>
+        <title>Own Lemon</title>
 
         <!-- Fonts -->
          <!--<link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">-->
@@ -26,7 +26,7 @@
             <div class="collapse navbar-collapse justify-content-center " id="navbarScroll" >
             <ul class="navbar-nav my-lg-2 gap-5 " style="--bs-scroll-height: 100px;">
                 <li class="nav-item">
-                <a class="nav-link btn btn-warning " aria-current="page" href="<?=route('inicio') ?>">Inicio</a>
+                <a class="nav-link btn btn-warning " aria-current="page" href="/">Inicio</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link btn btn-warning  active" href="<?=route('sobre_nosotros') ?>">Sobre Nosotros</a>
@@ -52,7 +52,7 @@
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Inicio</a>
+                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
                     @else
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline btn btn-warning" >Log in</a>
 
@@ -63,44 +63,8 @@
                 </div>
             @endif
         </div>
-
-         <!-- Right Side Of Navbar -->
-         <ul class="navbar-nav ms-auto gap-2 ">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link btn btn-warning  " href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link btn btn-warning " href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle btn btn-warning" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
         </nav>
-        <h1 class="text-center"  style=" margin-top: 5%">¿Quiénes somos?</h1>
+        <h1 class="text-center"  style=" margin-top: 5%">OWN LEMON</h1>
         <figure class="text-center">
         <blockquote class="blockquote">
             <p>Aquí va una frase o eslogan de la empresa </p>
@@ -110,7 +74,7 @@
         </figcaption>
         </figure>
 
-        <img src="../resources/imagenes/comunidadd.jpg" class="img-fluid text-center"  alt="...">
+        <img src="../resources/imagenes/lemon.jpg" class="img-fluid text-center active"  alt="...">
 
         <div class="card-group" style="margin-top:2%">
             <div class="card mb-3 " >
@@ -138,7 +102,5 @@
             </div>
         </div>
 
-        
-   
     </body> 
 </html>
