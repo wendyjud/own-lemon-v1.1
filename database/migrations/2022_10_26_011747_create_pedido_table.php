@@ -29,6 +29,7 @@ class CreatePedidoTable extends Migration
             $table->text('nota')->nullable();
             $table->boolean('aprobacion')->default(false);
             $table->boolean('terminos')->default(true);
+            $table->timestamps();
         });
     }
 

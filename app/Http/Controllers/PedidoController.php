@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Pedido;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
+
 class PedidoController extends Controller
 {
     /**
@@ -17,6 +19,8 @@ class PedidoController extends Controller
         $this->middleware('auth');
     }
     protected $table='pedido';
+
+   
     public function index()
     {
         //
@@ -61,9 +65,17 @@ class PedidoController extends Controller
      * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function show(Pedido $pedido)
+    public function show()
     {
         //
+
+    }
+
+    public function search(Request $request){
+        //ORIGINAL
+        $pedidos = DB::table('pedido')->where('nombre','like', $request->text."%")->orWhere('rfc_Empresa','like', $request->text."%")->paginate(5);
+        //return view('pedido.resultados',$pedidos);
+        return view("pedido.resultados",compact("pedidos"));
     }
 
     /**
@@ -72,9 +84,11 @@ class PedidoController extends Controller
      * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pedido $pedido)
+    public function edit($id)
     {
         //
+        $pedido=Pedido::findOrFail($id);
+        return view('pedido.editar_pedido', compact('pedido'));
     }
 
     /**
@@ -84,9 +98,17 @@ class PedidoController extends Controller
      * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pedido $pedido)
+    public function update(Request $request,  $id)
     {
         //
+        $datosPedido=request()->except(['_token','_method']);
+        Pedido::where('id','=',$id)->update($datosPedido);
+
+        //$pedido=Pedido::findOrFail($id);
+        //return view('pedido.editar_pedido', compact('pedido'));
+        $datos['pedido']=Pedido::paginate(5);
+        return view ('pedido.mis_pedidos',$datos);
+
     }
 
     /**
@@ -95,11 +117,11 @@ class PedidoController extends Controller
      * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function destroy($pedido)//Pedido $pedido
+    public function destroy($id)//Pedido $pedido
     {
         //
-        Pedido::destroy($pedido);
-        return redirect('mis_pedidos');
+        Pedido::destroy($id);
+        return redirect('crear-pedido');
         //{{url('/mis_pedidos/'.$pedido->id)}}
         //{{method_filed('DELETE')}}
     }

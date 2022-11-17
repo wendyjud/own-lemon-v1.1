@@ -19,7 +19,7 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/inicio', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
@@ -42,9 +42,20 @@ Route::get('/pedido', function () {
     return view('pedido.index');
 });
 
+//Ruta para eliminar-cancelar pedidos
+//Route::delete('mis_pedidos/{pedido}', [App\Http\Controllers\PedidoController::class, 'destroy'])->name('delete');
+Route::delete('resultados/{pedido}', [App\Http\Controllers\PedidoController::class, 'destroy'])->name('delete');
 
+Route::patch('resultados/{pedido}', [App\Http\Controllers\PedidoController::class, 'update'])->name('update');
+//Ruta para mostrar la vista editar pedido
+Route::get('resultados/{pedido}/editar_pedido', [App\Http\Controllers\PedidoController::class, 'edit'])->name('edit');
 //para acceder a todas los metodos de cliente de dorma automatizada comprobar con el comando "php artisan route::list"
 Route::resource('pedido',PedidoController::class);
+
+
+//HOY
+Route::post('/resultados', [PedidoController::class, 'search'])->name('resultados');
+
 
 Auth::routes();
 //Agregada solo para tener acceso cuando los usuarios esten logueados
@@ -52,9 +63,12 @@ Auth::routes();
 Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('mis_pedidos', [App\Http\Controllers\PedidoController::class, 'index'])->name('mis_pedidos');
 
-Route::get('/admin', [AdminController::class, 'index'])
-->middleware('auth.admin')
-->name('admin.index');
+//HOY
+Route::get('recientes', [App\Http\Controllers\PedidoController::class, 'show'])->name('recientes');
+
+
+Route::get('/admin', [AdminController::class, 'index'])->middleware('auth.admin')->name('admin.index');
+
 
 //Esta ruta funciona al escribir en el navegador admin/pedidos y mostrar los pedidos
-Route::get('/admin/pedidos', [AdminController::class, 'verPedidos'])->middleware('auth.admin')->name('admin.pedidos.blade');
+Route::get('/admin/pedidos', [AdminController::class, 'verPedidos'])->middleware('auth.admin')->name('pedidos');

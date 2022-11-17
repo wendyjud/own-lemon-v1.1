@@ -21,7 +21,7 @@
 <div id="app">
         <nav class="navbar navbar-expand-lg bg-light ">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/inicio') }}">
                     {{ config('app.name', 'Own Lemon') }}
                 </a>
 

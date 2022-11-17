@@ -95,20 +95,24 @@
           </li>
         </ul>
     <h1>Creando Pedido...</h1>
+
     <div class=" bg-warning" style="width:50%;">
 
     </div>
-    <form action="{{url('/pedido')}}"  method="post"  class="flex-row p-5 bg-primary justify-content-center" >
+    <form action="{{url('/pedido')}}"  method="post"  class="flex-row p-5 bg-primary justify-content-center " >
     @csrf
-      <div class="col-md-8">
-      <label for="cantidad">Ingresa la cantidad que deseas tomando en cuenta las medidas de exportación: </label>
-    <input type="number" name="cantidad"  placeholder="Ingresa la cantidad de tu exportación" min="1" max="150" > 
-      </div>
-      <fieldset class="row mb-3">
+    <div class="col-md-8">
+        <label for="cantidad">Ingresa la cantidad que deseas tomando en cuenta las medidas de exportación: </label>
+        <input type="number" name="cantidad"  min="1" max="150" required> 
+        <div class="invalid-feedback">
+        Por favor ingresa una cantidad para tu pedido
+        </div>
+    </div>
+    <fieldset class="row mb-3">
       <legend class="col-form-label col-sm-2 pt-0">Selecciona la modalidad de tus medidas </legend>
       <div class="col-sm-10">
         <div class="form-check">
-          <input class="form-check-input text-bg-secondary" type="radio" name="modalidad" id="gridRadios1" value="red con 5 libras" checked>
+          <input class="form-check-input text-bg-secondary" type="radio" name="modalidad" id="gridRadios1"  value="red con 5 libras" checked>
           <label class="form-check-label" for="gridRadios1">
             Red de 5 libras
           </label>
@@ -125,38 +129,39 @@
           Caja con 40 libras 
           </label>
         </div>
+        <div class="invalid-feedback">Selecciona una opción</div>
       </div>
     </fieldset>
     <div class="row g-3">
     <label for="nombre" class="form-label">Datos del respnsable:</label>
       <div class="col-sm-3">
-        <input type="text" class="form-control text-center" name="nombre" placeholder="Nombre del representante" id="">
+        <input type="text" class="form-control text-center" name="nombre" placeholder="Nombre del representante" id="" required>
       </div>
       <div class="col-sm-3">
-        <input type="text" class="form-control text-center" name="apellido" placeholder="Apellido del representante" id="">
+        <input type="text" class="form-control text-center" name="apellido" placeholder="Apellido del representante" id="" required>
       </div>
       <div class="col-sm-3">
-        <input type="text" class="form-control text-center" name="tel" placeholder="Teléfono de Contacto" id="">
+        <input type="text" class="form-control text-center" name="tel" placeholder="Teléfono de Contacto" id="" required>
       </div>
     </div>
     
   <div class="row g-3 ">
   <label for="direccion" class="form-label " >Dirección de Envío:</label>
   <div class="col-sm-3">
-    <input type="text" class="form-control text-center" name="calle" placeholder="Calle" aria-label="Calle">
+    <input type="text" class="form-control text-center" name="calle" placeholder="Calle" aria-label="Calle" required>
   </div>
   <div class="col-sm-1">
-    <input type="text" class="form-control text-center" name="num" placeholder="Número" aria-label="Número">
+    <input type="text" class="form-control text-center" name="num" placeholder="Número" aria-label="Número" required>
   </div>
   <div class="col-sm-2">
-    <input type="text" class="form-control text-center" name="col" placeholder="Colonia" aria-label="Colonia">
+    <input type="text" class="form-control text-center" name="col" placeholder="Colonia" aria-label="Colonia" required>
   </div>
   <div class="col-sm-1">
-    <input type="text" class="form-control text-center" name="cod_Postal" placeholder="C. P" aria-label="Código Postal">
+    <input type="text" class="form-control text-center" name="cod_Postal" placeholder="C. P" aria-label="Código Postal" required>
   </div>
-  <div class="col-sm-2">
-    <select id="inputState" class="form-select text-center" name="estado">
-      <option selected>Estado...</option>
+  <div class="col-sm-2 ">
+    <select id="inputState" class="form-select text-center " id="validationSelect" name="estado">
+      <option class="is-invalid" selected disabled>Estado...</option>
       <option value="Aguascalientes ">Aguascalientes</option>
       <option value="Baja California ">Baja California</option>
       <option value="Baja California Sur ">Baja California Sur</option>
@@ -190,11 +195,12 @@
       <option value="Yucatán ">Yucatán</option>
       <option value="Zacatecas ">Zacatecas</option>
     </select>
+
   </div>
 </div>
   <div class="col-sm-2">
     <label for="rfc" class="form-label">RFC de la empresa</label>
-    <input type="text" class="form-control" id="" placeholder="VECJ880326XXX" name="rfc_Empresa" >
+    <input type="text" class="form-control" id="" placeholder="VECJ880326XXX" name="rfc_Empresa" required >
   </div>
 
   <div class="col-10">
@@ -204,11 +210,10 @@
 
 
   <div class="col-10">
-    <div class="form-check">
-      <input class="form-check-input " type="checkbox" id="gridCheck" value=1>
-      <label class="form-check-label" for="gridCheck">
-        Términos y condiciones
-      </label>
+    <div class="form-check needs-validation">
+      <input class="form-check-input " type="checkbox" id="validationFormCheck1"  value=1 required>
+      <label class="form-check-label" for="validationFormCheck1">Términos y condiciones</label>
+      <div class="invalid-feedback">Es necesario aceptar los términos y condiciones</div>
     </div>
   </div>
   
@@ -216,7 +221,8 @@
   <div class="col-12">
     <button type="submit" class="btn btn-info">Realizar Pedido</button>
   </div>
-</form>
+      
+    </form>
 
 
     <!--<br><br>

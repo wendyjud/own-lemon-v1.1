@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -113,8 +112,7 @@
           </li>
         </ul>
 
-    
-    <h4 class="display-5 text-center">Mis Pedidos </h4>
+        <h4 class="display-5 text-center">Mis Pedidos </h4>
     <table class="table  table-primary table table-hover">
     <thead class="thead-info">
         <tr class="">
@@ -131,34 +129,58 @@
                 <th >C. P</th>
                 <th >RFC</th>
                 <th >Fecha</th>
-              
-           
+                <th >Nota</th>
+                <th >Aprobado</th>
+                <th >Editar  
+                </th>
+                <th >Cancelar
+                    
+                </th>
         </tr>
     </thead>
-    <tbody>
-        @foreach($pedido as $pedidos)
-        <tr class="">
-                <td>{{$pedidos->id}}</td>
-                <td>{{$pedidos->cantidad}}</td>
-                <td>{{$pedidos->modalidad}}</td>
-                <td>{{$pedidos->nombre}}</td>
-                <td>{{$pedidos->apellido}}</td>
-                <td>{{$pedidos->tel}}</td>
-                <td>{{$pedidos->calle}}</td>
-                <td>{{$pedidos->num}}</td>
-                <td>{{$pedidos->col}}</td>
-                <td>{{$pedidos->estado}}</td>
-                <td>{{$pedidos->cod_Postal}}</td>
-                <td>{{$pedidos->rfc_Empresa}}</td>
-                <td>{{$pedidos->fecha_Pedido}}</td>
+
+        <tbody>
+            @foreach($pedidos as $pedido)
+            <tr class="">
+                    <td>{{$pedido->id}}</td>
+                    <td>{{$pedido->cantidad}}</td>
+                    <td>{{$pedido->modalidad}}</td>
+                    <td>{{$pedido->nombre}}</td>
+                    <td>{{$pedido->apellido}}</td>
+                    <td>{{$pedido->tel}}</td>
+                    <td>{{$pedido->calle}}</td>
+                    <td>{{$pedido->num}}</td>
+                    <td>{{$pedido->col}}</td>
+                    <td>{{$pedido->estado}}</td>
+                    <td>{{$pedido->cod_Postal}}</td>
+                    <td>{{$pedido->rfc_Empresa}}</td>
+                    <td>{{$pedido->fecha_Pedido}}</td>
+                    <td>{{$pedido->nota}}</td>
+                    <td>{{$pedido->aprobacion}}</td>
+                    <td>
+                    <a href="{{url('/resultados/'.$pedido->id.'/editar_pedido')}}" class="btn btn-dark"> Editar</a>
+                    </td>
+                    <td>
+                    <form action="{{url('/resultados/'.$pedido->id)}}" method="post">
+                                @csrf
+                                {{method_field('DELETE')}}
+                                <input class="btn btn-danger" type="submit" onclick="return confirm('¿Realmente quieres cancelar el pedido?')" value="Cancelar">
+                        </form>
+                    </td>
                 
-        </tr>
-        @endforeach
-    </tbody>
+            </tr>
+            @endforeach
     
-</table>
+        </tbody>
+        
+    </table>
     
- 
+    
         
     </body>
 </html>
+
+
+
+
+
