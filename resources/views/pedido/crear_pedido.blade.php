@@ -200,10 +200,30 @@
 </div>
   <div class="col-sm-2">
     <label for="rfc" class="form-label">RFC de la empresa</label>
-    <input type="text" class="form-control" id="" placeholder="VECJ880326XXX" name="rfc_Empresa" required >
+    <input type="text" class="form-control" id="" placeholder="VECJAAMMDDXXX" name="rfc_Empresa" pattern="^[A-Z&Ñ]{3,4}[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])[A-Z0-9]{2}[0-9A]" title="No cumple con las reglas, revisa tu sintaxis  " required >
+ 
+  </div>
+  <div class="col-10">
+  <div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        *Nota
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>Recuerda que...</strong> los 3-4 primeros dígitos de tu RFC corresponden a las iniciales de tu empresa/nombre, seguido de los 2 dígitos del año en que fue creada, 2 digitos para el mes (enero=01), 2 digitos para el dia (por ejemplo, 01) y los últimos 3 dígitos, la homoclave.
+        <a href="https://www.sat.gob.mx/aplicacion/29073/verifica-si-estas-registrado-en-el-rfc" class="link-secondary">Verifica si estas registrado en el RFC.</a>
+      </div>
+    </div>
+  </div>
+  
+</div>
   </div>
 
   <div class="col-10">
+  
   <label for="exampleFormControlTextarea1" class="form-label">Notas: </label>
   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="nota"></textarea>
   </div>
@@ -223,8 +243,8 @@
   </div>
       
     </form>
-
-
+    
+  
     <!--<br><br>
     Estas creando un pedido...<br>
 

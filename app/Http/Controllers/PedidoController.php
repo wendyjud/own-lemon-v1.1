@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pedido;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\PedidoRequest;
 use Illuminate\Support\Facades\DB;
 
 class PedidoController extends Controller
@@ -19,6 +20,7 @@ class PedidoController extends Controller
         $this->middleware('auth');
     }
     protected $table='pedido';
+
 
    
     public function index()
@@ -51,9 +53,10 @@ class PedidoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PedidoRequest $request)
     {
         //
+        //$datosPedido=Pedido::create($request->all());
         $datosPedido=request()->except('_token');
         Pedido::insert($datosPedido);
         return response()->json($datosPedido);
@@ -125,4 +128,6 @@ class PedidoController extends Controller
         //{{url('/mis_pedidos/'.$pedido->id)}}
         //{{method_filed('DELETE')}}
     }
+
+    
 }

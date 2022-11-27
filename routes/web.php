@@ -30,13 +30,20 @@ Route::get('/sobre-nosotros', function () {
 Route::view('/inicio',"welcome")->name('inicio');
 Route::view('/sobre_nosotros',"sobre_nosotros")->name('sobre_nosotros');
 Route::view('/sobre_producto',"sobre_producto")->name('sobre_producto');
-Route::view('/cotizar',"pedido.cotizar_pedido")->name('cotizar');
+//Route::view('/cotizar',"pedido.cotizar_pedido")->name('cotizar');
+//Route::view('/cotizar/orden',"pedido.cotizar_pedido")->name('cotizar/orden');
 Route::view('/contacto',"contacto")->name('contacto');
 
 Route::view('/crear-pedido',"pedido.crear_pedido")->name('pedido');
 
 Route::view('admin/sobre_nosotros',"admin.editar_sobre_nosotros")->name('admin/sobre_nosotros');
 //Route::view('/privada',"secret")->name('privada'); //SOLO SI SE HA INICIADO CORRECTAMENTE LA SESION PODRA VERT ESTA PESTAÑA
+
+Route::get('cotizar/pdf/',[App\Http\Controllers\CotizacionController::class,'pdf'])->name('cotizar.pdf');
+
+
+Route::get('/cotizar', [App\Http\Controllers\CotizacionController::class, 'cotizar'])->name('cotizar');
+Route::post('/cotizar', [App\Http\Controllers\CotizacionController::class, 'cotizar'])->name('cotizar');
 
 Route::get('/pedido', function () {
     return view('pedido.index');

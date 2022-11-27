@@ -1,3 +1,7 @@
+<?php
+use Illuminate\Support\Facades\DB;
+?>
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -6,6 +10,8 @@
 
         <title>Cotizar</title>
         @vite(['resources/js/app.js'])
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     </head>
     <body class="antialiased">
             
@@ -35,19 +41,7 @@
                 </ul>
             </div>  
             </div>
-            <div class="d-flex gap-2 col-6 justify-content-md-end ">
-                    @if (Route::has('login'))
-                            @auth
-                                <a href="{{ url('/home') }}" class="btn btn-warning me-md-3"  >Inicio</a>
-                            @else
-                                <a href="{{ route('login') }}" class="btn btn-warning me-md-3">Log in</a>
-
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="btn btn-warning ">Register</a>
-                                @endif
-                            @endauth
-                    @endif
-            </div>
+          
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto gap-2 ">
                         <!-- Authentication Links -->
@@ -86,6 +80,10 @@
         </nav>
 
         <h1>Cotiza tus pedidos!</h1>
+
+     
+        <form class="" name="fr"id="fr" action="{{url('/cotizar/')}}" method="POST">
+        @csrf
         <div class="d-flex justify-content-center bg-primary ">
             <div class="bg-primary col-sm-4" >
                     <h3 class="text-center">Llena los siguientes datos del formulario:</h3>
@@ -93,11 +91,30 @@
                         <div class="col-sm-12">
                             <div class="input-group mb-3 text-center">
                             <span class="input-group-text " id="basic-addon1">Modalidad de Venta</span>
-                            <select class="form-select" aria-label="Default select example">
-                            <option class="p-2 " selected>Elige una modalidad</option>
-                            <option value="Red de 5 libras">Red de 5 libras</option>
-                            <option value="Caja con 10 libras">Caja con 10 libras</option>
-                            <option value="3">Caja con 40 libras</option>
+                            <select class="form-select"  name="modalidad">
+                            <option class="p-2 " disabled selected>Elige una modalidad</option>
+                            <option value="5" >Red de 5 libras</option>
+                            <option value="10">Caja con 10 libras</option>
+                            <option value="40">Caja con 40 libras</option>
+                            </select> 
+                                <div class="invalid-feedback">
+                                    Selecciona un estado válido.
+                                </div>
+                            </div>  
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="input-group mb-3 text-center">
+                            <span class="input-group-text " id="basic-addon1">Tipo de limón</span>
+                            <select name="tipo" id="tipo" class="form-select" aria-label="Default select example" >
+                            <option class="p-2 " disabled selected>Selecciona el tipo de limón</option>
+
+                                    <option value="Italiano">Italiano</option>
+
+                                    <option value="Mexicano">Mexicano</option>
+
+                                    <option value="Persa">Persa</option>
+
+
                             </select> 
                             </div>  
                         </div>
@@ -105,28 +122,22 @@
                         <div class="col-sm-12">
                             <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Cantidad</span>
-                            <select class="form-select" aria-label="Default select example">
-                            <option selected>Elije una cantidad </option>
-                            <?php
+                            <select name=cantidad  class="form-select" aria-label="Default select example" >
+                            <option disabled selected>Elije una cantidad </option>
+            
+                           <?php
                             for ($i=1; $i <101 ; $i++) { 
                             echo "?><option value=$i>$i</option><?php";
                             }
                             ?>
-                        </select> 
+                            </select> 
                             </div>  
 
-                        
-                        <div class="col-sm-12">
-                        <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Estado</span>
-                        <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Código Postal">
-                        </div>
-                        </div>
 
                         <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Estado</span>
-                        <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Estado...">
-                        <datalist id="datalistOptions">
+                        <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Estado..." name="estado" >
+                        <datalist id="datalistOptions"  >
                         <option value="Aguascalientes ">Aguascalientes</option>
                         <option value="Baja California ">Baja California</option>
                         <option value="Baja California Sur ">Baja California Sur</option>
@@ -160,17 +171,127 @@
                         <option value="Yucatán ">Yucatán</option>
                         <option value="Zacatecas ">Zacatecas</option>
                         </datalist>
-                        </div>
-                        <button type="button" class="btn btn-info">Cotizar</button>
-                </div>
-                
+                        </div>             
+                    </div>
+
+                    
+                     <!-- Button trigger modal -->
+                    <button type="submit" class="btn btn-secondary" id="btnCotizar" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Cotizar
+                    </button>
+                    {{$msg}}
+                    
+        </form>
+        
+      
+
+        <!-- Modal -->
+        <form class="" name="fr"id="fr" action="" method="POST">
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Tu cotización está lista!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
+            <div class="modal-body">
+             <!--El total de tu pedido sería de $899.69 por una cantidad de 2 paquetes en presentación de 5 (red/cajas) de limón orgánico Italiano. El estado seleccionado fue: Tabasco y el monto extra por el envío a este estado es de: $301.69-->
+            {{$msg}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-warning">Descargar cotización</button>
+            </div>
+            </div>
         </div>
-
-        <div class="bg-warning mb-3 row" >
-            
         </div>
+        </form>
+
+       
+
+       
+
+        
+        
+
+      
+        
 
     </body>
+    <script type="text/javascript">  
+
+    </script>
+    <!--<script  type="text/javascript">
+           /* var alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+            var alertTrigger = document.getElementById('liveAlertBtn')
+
+            function alert(message, type) {
+            var wrapper = document.createElement('div')
+            wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+
+            alertPlaceholder.append(wrapper)
+            }
+
+            if (alertTrigger) {
+            alertTrigger.addEventListener('click', function () {
+                alert('{{$msg}}', 'success')
+            })
+            }*/
+            $("#btnCotizar").click(
+                function(){
+                    //$("#staticBackdrop").show();
+                    '<h1>hola</h1>'
+                }
+            )
+
+        $("#fr").submit(function(e){
+        e.preventDefault();
+
+        let modalidad = $("#modalidad").val();
+        let tipo = $("#tipo").val();
+        let cantidad = $("#cantidad").val();
+        let estado = $("#estado").val();
+        //let _token = $("input[name=_token]").val();
+
+      
+            //para funcionalidad submit del boton
+  
+
+            $(function() {
+                $('#btnCotizar').on('click', function(e) {
+                    $('#fr').submit();
+                });
+            });
+
+            //solo se activa el boton si los campos son llenado
+            function activarBoton() {
+                if(verificar()) {
+                    btnCotizar.disabled=false
+                }
+                else {
+                    btnCotizar.disabled=true
+                }
+            }
+
+            function verificar() {
+                if( modalidad.value==="" )
+                    return false;
+                if( tipo.value==="" )
+                    return false;
+                if( cantidad.value==="" )
+                    return false;
+                if( estado.value==="" )
+                    return false;
+                return true;
+            }
+
+            var btnCotizar = document.getElementById("btnCotizar");
+            btnCotizar.disabled = true;
+            var modalidad = document.fr.modalidad;
+            var tipo = document.fr.tipo;
+            var cantidad = document.fr.cantidad;
+            var estado = document.fr.estado;
+            modalidad.onkeyup = tipo.onkeyup = cantidad.onkeyup =estado.onkeyup =activarBoton;
+
+	 	</script> -->
 </html>

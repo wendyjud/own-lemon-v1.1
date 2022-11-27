@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pedido extends Model
+class Cotizacion extends Model
 {
-    protected $table='pedido';
+    protected $table='limones';
+    protected $estados = 'estados';
     use HasFactory;
 
 }
