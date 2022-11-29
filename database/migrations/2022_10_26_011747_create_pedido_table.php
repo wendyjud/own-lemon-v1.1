@@ -13,10 +13,11 @@ class CreatePedidoTable extends Migration
     {
         Schema::create('pedido', function (Blueprint $table) {
             $table->integer('id', true);
+            $table->string('tipo', 8);
             $table->integer('cantidad');
             $table->string('modalidad', 20);
             $table->string('nombre', 20);
-            $table->string('apellido', 10);
+            $table->string('apellido', 15);
             $table->string('tel', 13);
             $table->string('calle', 30);
             $table->string('num', 6);

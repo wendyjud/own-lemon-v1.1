@@ -115,6 +115,10 @@
 
     
     <h4 class="display-5 text-center">Mis Pedidos </h4>
+    //@if (session('status'))
+        //se puede poner alerta o lo que sea 
+        <!--<h4 class="display-5 text-center bg-success">{{session('status')}} </h4>-->
+    //@endif
     <table class="table  table-primary table table-hover">
     <thead class="thead-info">
         <tr class="">

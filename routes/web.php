@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PaymentController;
 
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\AuthenticatedSessionController;
@@ -36,6 +37,9 @@ Route::view('/contacto',"contacto")->name('contacto');
 
 Route::view('/crear-pedido',"pedido.crear_pedido")->name('pedido');
 
+//Route::view('/pago-status',"pedido.pagostatus")->name('pago-status');
+
+
 Route::view('admin/sobre_nosotros',"admin.editar_sobre_nosotros")->name('admin/sobre_nosotros');
 //Route::view('/privada',"secret")->name('privada'); //SOLO SI SE HA INICIADO CORRECTAMENTE LA SESION PODRA VERT ESTA PESTAÑA
 
@@ -44,6 +48,20 @@ Route::get('cotizar/pdf/',[App\Http\Controllers\CotizacionController::class,'pdf
 
 Route::get('/cotizar', [App\Http\Controllers\CotizacionController::class, 'cotizar'])->name('cotizar');
 Route::post('/cotizar', [App\Http\Controllers\CotizacionController::class, 'cotizar'])->name('cotizar');
+
+//payment
+
+Route::post('/pago',[App\Http\Controllers\PaymentController::class,'payWithPayPal'])->name('pago');
+//resultados
+Route::post('/status',[App\Http\Controllers\PaymentController::class,'payPalStatus'])->name('status');
+Route::get('/status',[App\Http\Controllers\PaymentController::class,'payPalStatus'])->name('status');
+
+//resultados
+
+Route::get('/pago-status', function () {
+    return view('pedido.pagostatus');
+});
+
 
 Route::get('/pedido', function () {
     return view('pedido.index');

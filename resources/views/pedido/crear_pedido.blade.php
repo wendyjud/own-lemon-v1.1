@@ -99,16 +99,27 @@
     <div class=" bg-warning" style="width:50%;">
 
     </div>
-    <form action="{{url('/pedido')}}"  method="post"  class="flex-row p-5 bg-primary justify-content-center " >
+    <form action="{{ route('pago') }}"  method="POST"  id="form" class="flex-row p-5 bg-primary justify-content-center " >
     @csrf
+    <div class="col-sm-8">
+                            <div class="input-group mb-3 text-center">
+                            <span class="input-group-text " id="basic-addon1">Tipo de limón</span>
+                            <select name="tipo" id="tipo" class="form-select" aria-label="Default select example" >
+                            <option class="p-2 " selected disabled>Selecciona el tipo de limón</option>
+                                    <option value="Italiano">Italiano</option>
+                                    <option value="Mexicano">Mexicano</option>
+                                    <option value="Persa">Persa</option>
+                            </select> 
+                            </div>  
+    </div>
     <div class="col-md-8">
         <label for="cantidad">Ingresa la cantidad que deseas tomando en cuenta las medidas de exportación: </label>
-        <input type="number" name="cantidad"  min="1" max="150" required> 
+        <input type="number" name="cantidad"  id="cantidad" min="1" max="150" required> 
         <div class="invalid-feedback">
         Por favor ingresa una cantidad para tu pedido
         </div>
     </div>
-    <fieldset class="row mb-3">
+    <fieldset class="row mb-3" id="modalidad">
       <legend class="col-form-label col-sm-2 pt-0">Selecciona la modalidad de tus medidas </legend>
       <div class="col-sm-10">
         <div class="form-check">
@@ -160,7 +171,7 @@
     <input type="text" class="form-control text-center" name="cod_Postal" placeholder="C. P" aria-label="Código Postal" required>
   </div>
   <div class="col-sm-2 ">
-    <select id="inputState" class="form-select text-center " id="validationSelect" name="estado">
+    <select id="estado" class="form-select text-center " id="validationSelect" name="estado">
       <option class="is-invalid" selected disabled>Estado...</option>
       <option value="Aguascalientes ">Aguascalientes</option>
       <option value="Baja California ">Baja California</option>
@@ -213,7 +224,7 @@
     </h2>
     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
       <div class="accordion-body">
-        <strong>Recuerda que...</strong> los 3-4 primeros dígitos de tu RFC corresponden a las iniciales de tu empresa/nombre, seguido de los 2 dígitos del año en que fue creada, 2 digitos para el mes (enero=01), 2 digitos para el dia (por ejemplo, 01) y los últimos 3 dígitos, la homoclave.
+        <strong>Este campo solo acepta mayúsculas* recuerda que...</strong> los 3-4 primeros dígitos de tu RFC corresponden a las iniciales de tu empresa/nombre, seguido de los 2 dígitos del año en que fue creada, 2 digitos para el mes (enero=01), 2 digitos para el dia (por ejemplo, 01) y los últimos 3 dígitos, la homoclave.
         <a href="https://www.sat.gob.mx/aplicacion/29073/verifica-si-estas-registrado-en-el-rfc" class="link-secondary">Verifica si estas registrado en el RFC.</a>
       </div>
     </div>
@@ -238,48 +249,79 @@
   </div>
   
   
-  <div class="col-12">
-    <button type="submit" class="btn btn-info">Realizar Pedido</button>
-  </div>
+                <div class="col-12">
+                  
+                  <!--<button type="submit" class="btn btn-info">Realizar Pedido</button>-->
+                  <!--<a class="btn btn-info" type="submit" href="#" >Realizar Pedido</a>-->
+                  <button type="button" class="btn btn-secondary" id="btnCotizar"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  Realizar Pedido
+                  </button>
+
+                </div>
       
+                <!-- Modal -->
+
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Completa tu pedido!</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="modal-body">
+                        Resumen de tu pedido
+                        
+                        Para continuar con tu pedido es necesario realizar el pago
+                        <div id="result">
+
+                        </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancelar</button>
+                            
+                            <!--<<form action="{{route('pedido')}}" method="post">--->
+                              @csrf
+                               <input type="hidden" name="amount" id="" value="200">
+                              <button type="submit" class="btn btn-warning" >Continuar</button>
+                            <!--</form>-->
+
+                        </div>
+                        </div>
+                    </div>
+                </div>
     </form>
     
-  
-    <!--<br><br>
-    Estas creando un pedido...<br>
 
-    <form action="{{url('/pedido')}}"  method="post" >
-       
-    @csrf
 
-    <label for="cantidad">Ingresa la cantidad que deseas tomando en cuenta las medidas de exportación: </label>
-    <input type="number" name="cantidad"  placeholder="Ingresa la cantidad de tu exportación" min="1" > <br>
-    Selecciona la modalidad de tus medidas <br>
-    <input type="radio" name="modalidad" value="red con 5 libras"> Red de 5 libras <br>
-    <input type="radio" name="modalidad" value="caja con 10 libras ">Caja con 10 libras <br>
-    <input type="radio" name="modalidad" value="caja con 40 libras">Caja con 40 libras <br><br>
-    Ingresa el nombre del representante del pedido: 
-    <input type="text" name="nombre"  placeholder="Nombre"><br>
-    Ingresa el apellido: 
-    <input type="text" name="apellido"  placeholder="Apellido"><br>
-    Ingresa el mejor teléfono de contacto: 
-    <input type="text" name="tel"  placeholder="Teléfono"><br>
-    Ingresa la dirección de envío: 
-    <input type="text" name="calle"  placeholder="Calle">
-    <input type="text" name="num"  placeholder="Número">
-    <input type="text" name="col"  placeholder="Colonia">
-    <input type="text" name="estado"  placeholder="Estado">
-    <input type="text" name="cod_Postal"  placeholder="C.P"><br><br>
-    Ingresa el RFC de la empresa: 
-    <input type="text" name="rfc_Empresa"  placeholder="RFC Empresa"><br><br>
-    <input type="text" name="fecha_Pedido"  placeholder="AAAA-MM-DD"><br><br>
-    Ingresa alguna nota o comentario para tu pedido: <textarea name="nota" cols="50" rows="3" ></textarea>
-    <br>
+                     
 
-    <input type="submit" value="Hacer pedido">
-
-    </form>--> 
+                    
   </body>
+  <script type="text/javascript">  
+            /*var form=document.getElementById('form')
+            form.addEventListener('button', function(event){
+            event.preventDefault()//revent the form from other submits
+
+            var modalidad=document.getElementById('modalidad').value
+            //console.log(modalidad)
+            var tipo=document.getElementById('tipo').value
+            //console.log(tipo)
+            var cantidad=document.getElementById('cantidad').value
+            //console.log(cantidad)
+            var estado=document.getElementById('estado').value
+            console.log(estado)
+            //var msg=$this.data('')    
+            //console.log(msj)
+            document.getElementById('result').innerHTML = `
+            <p>Estado: ${estado}</p>
+            <p>El Tipo: ${tipo}</p>
+           
+           `
+        }) */
+
+      
+
+    </script>
 </html>
 
 

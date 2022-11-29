@@ -26,6 +26,7 @@ class CotizacionController extends Controller
         //getttype($variable) srive para saber que tipo de dato estamos trabajando
         $tipo=DB::table('limones')->where('tipo', 'like',$request->tipo."%")->value('tipo');
         $msg='El total de tu pedido sería de $'.$total.' por una cantidad de '.$cantidad.' paquetes en presentación de '.$modalidad.' (red/cajas) de limón orgánico '.$tipo.'. El estado seleccionado fue: '.$estado.' y el monto extra por el envío a este estado es de: $'.$monto;
+        
         return view("pedido.cotizar_pedido")->with('msg',$msg);
     
       

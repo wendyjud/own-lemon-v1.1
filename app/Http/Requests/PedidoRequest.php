@@ -25,10 +25,11 @@ class PedidoRequest extends FormRequest
     {
         return [
             //
+            'nombre'    => 'required|string|max:8',
             'cantidad'  => 'required',
-            'modalidad' => 'required',
-            'nombre'    => 'required|string|max:60',
-            'apellido'  => 'required|string|max:60',
+            'modalidad' => 'required|string|max:20',
+            'nombre'    => 'required|string|max:20',
+            'apellido'  => 'required|string|max:20',
             'tel'       => 'required|string|max:13',
             'calle'     => 'required|string|max:30',
             'num'       => 'required|string|max:6',

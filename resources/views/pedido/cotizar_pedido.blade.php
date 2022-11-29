@@ -1,8 +1,11 @@
-<?php
-use Illuminate\Support\Facades\DB;
-?>
+
 
 <!DOCTYPE html>
+
+
+
+
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -82,7 +85,7 @@ use Illuminate\Support\Facades\DB;
         <h1>Cotiza tus pedidos!</h1>
 
      
-        <form class="" name="fr"id="fr" action="{{url('/cotizar/')}}" method="POST">
+        <form class="" name="fr"id="form" action="{{url('/cotizar')}}" method="POST">
         @csrf
         <div class="d-flex justify-content-center bg-primary ">
             <div class="bg-primary col-sm-4" >
@@ -91,7 +94,7 @@ use Illuminate\Support\Facades\DB;
                         <div class="col-sm-12">
                             <div class="input-group mb-3 text-center">
                             <span class="input-group-text " id="basic-addon1">Modalidad de Venta</span>
-                            <select class="form-select"  name="modalidad">
+                            <select class="form-select"  name="modalidad" id="modalidad">
                             <option class="p-2 " disabled selected>Elige una modalidad</option>
                             <option value="5" >Red de 5 libras</option>
                             <option value="10">Caja con 10 libras</option>
@@ -107,14 +110,9 @@ use Illuminate\Support\Facades\DB;
                             <span class="input-group-text " id="basic-addon1">Tipo de limón</span>
                             <select name="tipo" id="tipo" class="form-select" aria-label="Default select example" >
                             <option class="p-2 " disabled selected>Selecciona el tipo de limón</option>
-
                                     <option value="Italiano">Italiano</option>
-
                                     <option value="Mexicano">Mexicano</option>
-
                                     <option value="Persa">Persa</option>
-
-
                             </select> 
                             </div>  
                         </div>
@@ -122,7 +120,7 @@ use Illuminate\Support\Facades\DB;
                         <div class="col-sm-12">
                             <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Cantidad</span>
-                            <select name=cantidad  class="form-select" aria-label="Default select example" >
+                            <select name="cantidad" id="cantidad"  class="form-select" aria-label="Default select example" >
                             <option disabled selected>Elije una cantidad </option>
             
                            <?php
@@ -136,7 +134,7 @@ use Illuminate\Support\Facades\DB;
 
                         <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Estado</span>
-                        <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Estado..." name="estado" >
+                        <input class="form-control" list="datalistOptions" id="estado" placeholder="Estado..." name="estado" >
                         <datalist id="datalistOptions"  >
                         <option value="Aguascalientes ">Aguascalientes</option>
                         <option value="Baja California ">Baja California</option>
@@ -173,52 +171,78 @@ use Illuminate\Support\Facades\DB;
                         </datalist>
                         </div>             
                     </div>
+                    <!--Esta parte del código actualiza el span al precionar el botón cotizar con el calculo correcto-->
+                    <button type="submit" class="btn btn-secondary" > Cotizar </button>
+                    <span>{{$msg}}</span>
 
-                    
+
+                    <!-- <input type="submit" value="Cotizar" onclick="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">-->
+                    <!-- <input type="submit" value="Cotizar" >-->
+                    <!-- <span>{{$msg}}</span>-->
+                   
+                   <input type="text" class="form-control" name="msg" value="{{ $msg }}" />
                      <!-- Button trigger modal -->
-                    <button type="submit" class="btn btn-secondary" id="btnCotizar" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                   <!--<button type="submit" class="btn btn-secondary" id="btnCotizar" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Cotizar
-                    </button>
-                    {{$msg}}
-                    
+                    </button>-->
+  
+                     <!-- Modal -->
+
+                    <!--<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Tu cotización está lista!</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        {{$msg}}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-warning">Descargar cotización</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>-->
+
+
         </form>
-        
-      
-
-        <!-- Modal -->
-        <form class="" name="fr"id="fr" action="" method="POST">
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Tu cotización está lista!</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-             <!--El total de tu pedido sería de $899.69 por una cantidad de 2 paquetes en presentación de 5 (red/cajas) de limón orgánico Italiano. El estado seleccionado fue: Tabasco y el monto extra por el envío a este estado es de: $301.69-->
-            {{$msg}}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-warning">Descargar cotización</button>
-            </div>
-            </div>
-        </div>
-        </div>
-        </form>
-
+                        
+                            
        
-
-       
-
-        
-        
-
-      
-        
+        <div id="result"></div>
 
     </body>
     <script type="text/javascript">  
+       /* var form=document.getElementById('form')
+        form.addEventListener('submit', function(event){
+            event.preventDefault()//revent the form from other submits
+
+            var modalidad=document.getElementById('modalidad').value
+            console.log(modalidad)
+            var tipo=document.getElementById('tipo').value
+            console.log(tipo)
+            var cantidad=document.getElementById('cantidad').value
+            console.log(cantidad)
+            var estado=document.getElementById('estado').value
+            console.log(estado)
+            var msg=$this.data('')
+        
+            console.log(msj)
+
+
+            document.getElementById('result').innerHTML = `
+            <p>Modalidad: ${modalidad}</p>
+            <p>El Tipo: ${tipo}</p>
+          
+
+    
+           
+           
+           `
+
+        }) 
 
     </script>
     <!--<script  type="text/javascript">
