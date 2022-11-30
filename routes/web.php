@@ -52,7 +52,8 @@ Route::post('/cotizar', [App\Http\Controllers\CotizacionController::class, 'coti
 //payment
 
 Route::post('/pago',[App\Http\Controllers\PaymentController::class,'payWithPayPal'])->name('pago');
-//resultados
+Route::get('/pago',[App\Http\Controllers\PaymentController::class,'payWithPayPal'])->name('pago');
+//Estado
 Route::post('/status',[App\Http\Controllers\PaymentController::class,'payPalStatus'])->name('status');
 Route::get('/status',[App\Http\Controllers\PaymentController::class,'payPalStatus'])->name('status');
 
@@ -62,6 +63,21 @@ Route::get('/pago-status', function () {
     return view('pedido.pagostatus');
 });
 
+//NEW
+Route::get('/pedidos', function () {
+    $pedidos = DB::table('pedido')->where('status_pago', '==', '0')->paginate(3);
+    $edo = DB::table('pedido')->value('estado');
+    $cantidad = DB::table('pedido')->value('cantidad');
+    $modalidad = DB::table('pedido')->value('modalidad');
+    $precio=DB::table('limones')->value('precio');
+    //$monto=DB::table('estados')->value('monto');
+    $monto=DB::table('estados')->select('monto')->where('estado', 'like', $edo )->get();
+    settype( $monto, "string");
+    $total=(($modalidad * ($cantidad * $precio)));
+  
+
+    return view('pedido.pedido')->with('pedidos', $pedidos)->with('total', $total)->with('monto', $monto);
+})->middleware('auth')->name('pedidos');
 
 Route::get('/pedido', function () {
     return view('pedido.index');

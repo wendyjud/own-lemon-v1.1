@@ -38,14 +38,15 @@ class PaymentController extends Controller
 
     // ...
 
-    public function payWithPayPal()
+    public function payWithPayPal(Request $request)
     {
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
 
         $amount = new Amount();
-        $amount->setTotal('3.99');
-        $amount->setCurrency('USD');
+        //$amount->setTotal($request->amount);
+        $amount->setTotal('417.97');
+        $amount->setCurrency('MXN');
 
         $transaction = new Transaction();
         $transaction->setAmount($amount);
@@ -94,7 +95,9 @@ class PaymentController extends Controller
         
         if ($result->getState() === 'approved') {
             $status = 'Gracias! El pago a través de PayPal se ha ralizado correctamente.';
-            return redirect('/pago-status')->with(compact('status'));
+            return redirect('/pago-status')->with(compact('status')); 
+            //return redirect('/pago-status')->with( 'status','Gracias! El pago a través de PayPal se ha ralizado correctamente.' );
+            //return view('/pago-status',compact('status'));
 
         }
 

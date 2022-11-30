@@ -96,7 +96,7 @@
                                 <input type="text" name="text" class="form-control"  id="text">
                             </div>
                             <div class="col-sm-2 my-3">
-                                <input type="submit" class="btn btn-secondary" value="Buscar">
+                                <input type="submit" class="btn btn-warning" value="Buscar">
                             </div>
                         </div>
                     </form>

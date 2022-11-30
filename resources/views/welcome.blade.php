@@ -13,52 +13,6 @@
         @vite(['resources/js/app.js'])
     </head>
     <body class="antialiased">
-            
-       <!-- <nav class="navbar navbar-expand-lg bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" disabled >Own Lemon</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-            <div class="collapse navbar-collapse justify-content-center " id="navbarScroll" >
-                <ul class="navbar-nav my-lg-2 gap-5 " style="--bs-scroll-height: 100px;">
-                    <li class="nav-item">
-                        <a class="nav-link active btn btn-warning " aria-current="page" href="/">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-warning " href="<?=route('sobre_nosotros') ?>">Sobre Nosotros</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle btn btn-warning " href="<?=route('sobre_producto')?>" role="button" data-bs-toggle="dropdown" aria-expanded="false">Producto</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="<?=route('cotizar') ?>">Cotizar</a></li>
-                            <li><a class="dropdown-item" href="<?=route('pedido') ?>">Pedido</a></li>        
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="<?=route('sobre_producto') ?>">sobre el producto</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link  btn btn-warning"  href="<?=route('contacto') ?>">Contacto</a>
-                    </li>
-                </ul>
-            </div>  
-            </div> </div>
-            <div class="d-flex gap-2 col-6 justify-content-md-end ">
-                    @if (Route::has('login'))
-                            @auth
-                                <a href="{{ url('/home') }}" class="btn btn-warning"  >Home</a>
-                            @else
-                                <a href="{{ route('login') }}" class="btn btn-warning me-md-3">Log in</a>
-
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="btn btn-warning ">Register</a>
-                                @endif
-                            @endauth
-                    @endif
-            
-        </nav>
-
- -->
         <h4 class="display-5 text-center">Bienvenido </h4>
             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
@@ -70,21 +24,21 @@
                     <div class="carousel-item active">
                         <img src="../resources/imagenes/lemon1.jpg" class="d-block w-100" alt="..." style="width: 300px; hight: 300px; margin: auto;">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Etiqueta de la primera diapositiva</h5>
-                            <p>Algún contenido placeholder representativo para la primera diapositiva.</p>
+                            <h5>Limón italiano</h5>
+                            <p>De pulpa jugosa, de acidez poco elevada y con numero de semillas escazo.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img src="../resources/imagenes/lemon2.jpeg" class="d-block w-100" alt="..." >
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Etiqueta de la segunda diapositiva</h5>
-                            <p>Algún contenido placeholder representativo para la segunda diapositiva.</p>
+                            <h5>Limón Mexicano</h5>
+                            <p>Por dentro es amarillo verdoso, jugoso y con semillas.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
                     <img src="../resources/imagenes/lemon3.jpeg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Etiqueta de la tercera diapositiva</h5>
+                        <h5>Limón Persa</h5>
                         <p>Algún contenido placeholder representativo para la tercera diapositiva.</p>
                     </div>
                     </div>
@@ -98,6 +52,22 @@
                     <span class="visually-hidden">Siguiente</span>
                 </button>
             </div>
+            <br>
     </body>
+
+    <!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted">
+
+  <!-- Copyright -->
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+    © 2022 Copyright:
+    <a class="text-reset fw-bold" href="#">Ownlemon.com</a>
+  </div>
+  <!-- Copyright -->
+  <div class="text-center p-0" style="background-color: rgba(0, 0, 0, 0.05);">
+  <span>Get connected with us: info@owlemon.com  -( +52 ) 55 2155 5555  -( +52 ) 55 2155 5558</span> 
+  </div>
+</footer>
+<!-- Footer -->
 </html>
 @endsection

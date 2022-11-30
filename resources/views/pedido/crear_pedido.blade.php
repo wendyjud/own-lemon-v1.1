@@ -99,12 +99,12 @@
     <div class=" bg-warning" style="width:50%;">
 
     </div>
-    <form action="{{ route('pago') }}"  method="POST"  id="form" class="flex-row p-5 bg-primary justify-content-center " >
+    <form action="{{ url('pedido') }}"  method="POST"  id="form" class="flex-row p-5 bg-primary justify-content-center " >
     @csrf
     <div class="col-sm-8">
                             <div class="input-group mb-3 text-center">
                             <span class="input-group-text " id="basic-addon1">Tipo de limón</span>
-                            <select name="tipo" id="tipo" class="form-select" aria-label="Default select example" >
+                            <select name="tipo" id="tipo" class="form-select" aria-label="Default select example" required>
                             <option class="p-2 " selected disabled>Selecciona el tipo de limón</option>
                                     <option value="Italiano">Italiano</option>
                                     <option value="Mexicano">Mexicano</option>
@@ -123,19 +123,19 @@
       <legend class="col-form-label col-sm-2 pt-0">Selecciona la modalidad de tus medidas </legend>
       <div class="col-sm-10">
         <div class="form-check">
-          <input class="form-check-input text-bg-secondary" type="radio" name="modalidad" id="gridRadios1"  value="red con 5 libras" checked>
+          <input class="form-check-input text-bg-secondary" type="radio" name="modalidad" id="gridRadios1"  value=5 checked>
           <label class="form-check-label" for="gridRadios1">
             Red de 5 libras
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input text-bg-secondary" type="radio" name="modalidad" id="gridRadios2" value="Caja con 10 libras">
+          <input class="form-check-input text-bg-secondary" type="radio" name="modalidad" id="gridRadios2" value=10>
           <label class="form-check-label" for="gridRadios2">
            Caja con 10 libras
           </label>
         </div>
         <div class="form-check ">
-          <input class="form-check-input text-bg-secondary" type="radio" name="modalidad"id="gridRadios3" value="Caja con 40 libras " >
+          <input class="form-check-input text-bg-secondary" type="radio" name="modalidad"id="gridRadios3" value=40 >
           <label class="form-check-label" for="gridRadios3">
           Caja con 40 libras 
           </label>
@@ -211,7 +211,7 @@
 </div>
   <div class="col-sm-2">
     <label for="rfc" class="form-label">RFC de la empresa</label>
-    <input type="text" class="form-control" id="" placeholder="VECJAAMMDDXXX" name="rfc_Empresa" pattern="^[A-Z&Ñ]{3,4}[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])[A-Z0-9]{2}[0-9A]" title="No cumple con las reglas, revisa tu sintaxis  " required >
+    <input type="text" class="form-control" id="" placeholder="VEC990128XXX" name="rfc_Empresa" pattern="^[A-Z&Ñ]{3,4}[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])[A-Z0-9]{2}[0-9A]" title="No cumple con las reglas, revisa tu sintaxis  " required >
  
   </div>
   <div class="col-10">
@@ -242,7 +242,7 @@
 
   <div class="col-10">
     <div class="form-check needs-validation">
-      <input class="form-check-input " type="checkbox" id="validationFormCheck1"  value=1 required>
+      <input class="form-check-input bg-dark" type="checkbox" id="validationFormCheck1"  value=1 required>
       <label class="form-check-label" for="validationFormCheck1">Términos y condiciones</label>
       <div class="invalid-feedback">Es necesario aceptar los términos y condiciones</div>
     </div>
@@ -253,7 +253,7 @@
                   
                   <!--<button type="submit" class="btn btn-info">Realizar Pedido</button>-->
                   <!--<a class="btn btn-info" type="submit" href="#" >Realizar Pedido</a>-->
-                  <button type="button" class="btn btn-secondary" id="btnCotizar"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <button type="submit" class="btn btn-warning" id="btnCotizar"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                   Realizar Pedido
                   </button>
 
@@ -265,25 +265,20 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Completa tu pedido!</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">Llena los datos!</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body" id="modal-body">
-                        Resumen de tu pedido
                         
-                        Para continuar con tu pedido es necesario realizar el pago
+                        Para continuar con tu pedido primero es necesario llenar los datos solicitados. Una vez hecho esto, se mostrar un resumen de tu orden y te mandara a realizar el pago.
                         <div id="result">
 
                         </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Aceptar</button>
                             
-                            <!--<<form action="{{route('pedido')}}" method="post">--->
-                              @csrf
-                               <input type="hidden" name="amount" id="" value="200">
-                              <button type="submit" class="btn btn-warning" >Continuar</button>
-                            <!--</form>-->
+                            
 
                         </div>
                         </div>

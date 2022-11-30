@@ -1,8 +1,10 @@
-<div class="col-md-8">
+
+<div class="col-md-8 container-md bg-white">
+  <h3 class="text-center">Editando pedido...</h3>
       <label for="cantidad">Ingresa la cantidad que deseas tomando en cuenta las medidas de exportación: </label>
       
     <input type="number" name="cantidad"  placeholder="Ingresa la cantidad de tu exportación" min="1" max="150" value="{{$pedido->cantidad}}"> <br><br>
-      </div>
+      
       <fieldset class="row mb-3 ">
       <legend class="col-form-label col-sm-2 pt-0 mb-3 ">Medidas: </legend>
       
@@ -10,19 +12,19 @@
       <input class="form-check-input text-bg-secondary " type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled checked>
       <label class="form-check-label text-bg-secondary " for="flexRadioDisabled">Selecciona la modalidad de tus medidas</label>
         <div class="form-check  was-validated">
-          <input class="form-check-input text-bg-secondary" type="radio" name="modalidad"  id="validationFormCheck1" value="Red de 5 libras" required >
+          <input class="form-check-input text-bg-secondary" type="radio" name="modalidad"  id="validationFormCheck1" value=5 required >
           <label class="form-check-label" for="validationFormCheck1" >
             Red de 5 libras
           </label>
         </div>
         <div class="form-check  was-validated">
-          <input class="form-check-input text-bg-secondary" type="radio" name="modalidad" id="validationFormCheck2" value="Caja de 10 libras" required>
+          <input class="form-check-input text-bg-secondary" type="radio" name="modalidad" id="validationFormCheck2" value=10 required>
           <label class="form-check-label" for="validationFormCheck2">
            Caja con 10 libras
           </label>
         </div>
         <div class="form-check  was-validated ">
-          <input class="form-check-input text-bg-secondary" type="radio" name="modalidad"id="validationFormCheck3" value="Caja de 10 libras "  required>
+          <input class="form-check-input text-bg-secondary" type="radio" name="modalidad"id="validationFormCheck3" value=40  required>
           <label class="form-check-label" for="validationFormCheck3">
           Caja con 40 libras 
           </label>
@@ -95,20 +97,20 @@
     </select>
   </div>
 </div>
-  <div class="col-sm-2">
+  <div class="col-sm-2 ">
     <label for="rfc" class="form-label">RFC de la empresa</label>
     <input type="text" class="form-control" id="" placeholder="VECJ880326XXX" name="rfc_Empresa"  value="{{$pedido->rfc_Empresa}}">
   </div>
 
-  <div class="col-10">
+  <div class="col-10 text-center">
   <label for="exampleFormControlTextarea1" class="form-label">Notas: </label>
   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="nota" value="{{$pedido->nota}}"></textarea>
   </div>
 
 
-  <div class="col-10">
+  <div class="col-10 ">
     <div class="form-check">
-      <input class="form-check-input " type="checkbox" id="gridCheck" value=1>
+      <input class="form-check-input bg-secondary" type="checkbox" id="gridCheck" value=1>
       <label class="form-check-label" for="gridCheck">
         Términos y condiciones
       </label>
@@ -116,6 +118,7 @@
   </div>
   
   
-  <div class="col-12">
-    <button type="submit" class="btn btn-info">Guardar datos</button>
+  <div class="col-12 text-center">
+    <button type="submit" class="btn btn-warning">Guardar datos</button>
+  </div>
   </div>

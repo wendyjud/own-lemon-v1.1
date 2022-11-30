@@ -15,7 +15,7 @@ class CreatePedidoTable extends Migration
             $table->integer('id', true);
             $table->string('tipo', 8);
             $table->integer('cantidad');
-            $table->string('modalidad', 20);
+            $table->integer('modalidad');
             $table->string('nombre', 20);
             $table->string('apellido', 15);
             $table->string('tel', 13);
@@ -29,7 +29,7 @@ class CreatePedidoTable extends Migration
             $table->timestamp('fecha_Pedido')->useCurrent();
             $table->text('nota')->nullable();
             $table->boolean('aprobacion')->default(false);
-            $table->boolean('terminos')->default(true);
+            $table->boolean('status_pago')->default(false);
             $table->timestamps();
         });
     }

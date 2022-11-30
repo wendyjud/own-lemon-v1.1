@@ -95,7 +95,7 @@
                                 <input type="text" name="text" class="form-control"  id="text">
                             </div>
                             <div class="col-sm-2 my-3">
-                                <input type="submit" class="btn btn-secondary" value="Buscar">
+                                <input type="submit" class="btn btn-warning" value="Buscar">
                             </div>
                         </div>
                     </form>
@@ -158,7 +158,7 @@
                     <td>{{$pedido->nota}}</td>
                     <td>{{$pedido->aprobacion}}</td>
                     <td>
-                    <a href="{{url('/resultados/'.$pedido->id.'/editar_pedido')}}" class="btn btn-dark"> Editar</a>
+                    <a href="{{url('/resultados/'.$pedido->id.'/editar_pedido')}}" class="btn btn-info border-dark"> Editar</a>
                     </td>
                     <td>
                     <form action="{{url('/resultados/'.$pedido->id)}}" method="post">

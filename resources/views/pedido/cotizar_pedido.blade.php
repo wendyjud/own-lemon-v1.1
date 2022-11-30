@@ -89,12 +89,12 @@
         @csrf
         <div class="d-flex justify-content-center bg-primary ">
             <div class="bg-primary col-sm-4" >
-                    <h3 class="text-center">Llena los siguientes datos del formulario:</h3>
+                    <h3 class="text-center">Llena los siguientes datos:</h3>
                     <div class="row mb-5">
                         <div class="col-sm-12">
                             <div class="input-group mb-3 text-center">
                             <span class="input-group-text " id="basic-addon1">Modalidad de Venta</span>
-                            <select class="form-select"  name="modalidad" id="modalidad">
+                            <select class="form-select"  name="modalidad" id="modalidad" required>
                             <option class="p-2 " disabled selected>Elige una modalidad</option>
                             <option value="5" >Red de 5 libras</option>
                             <option value="10">Caja con 10 libras</option>
@@ -108,8 +108,8 @@
                         <div class="col-sm-12">
                             <div class="input-group mb-3 text-center">
                             <span class="input-group-text " id="basic-addon1">Tipo de limón</span>
-                            <select name="tipo" id="tipo" class="form-select" aria-label="Default select example" >
-                            <option class="p-2 " disabled selected>Selecciona el tipo de limón</option>
+                            <select name="tipo" id="tipo" class="form-select" aria-label="Default select example" required>
+                            <option class="p-2 " disabled selected >Selecciona el tipo de limón</option>
                                     <option value="Italiano">Italiano</option>
                                     <option value="Mexicano">Mexicano</option>
                                     <option value="Persa">Persa</option>
@@ -120,8 +120,8 @@
                         <div class="col-sm-12">
                             <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Cantidad</span>
-                            <select name="cantidad" id="cantidad"  class="form-select" aria-label="Default select example" >
-                            <option disabled selected>Elije una cantidad </option>
+                            <select name="cantidad" id="cantidad"  class="form-select" aria-label="Default select example" required >
+                            <option disabled selected >Elije una cantidad </option>
             
                            <?php
                             for ($i=1; $i <101 ; $i++) { 
@@ -134,7 +134,7 @@
 
                         <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Estado</span>
-                        <input class="form-control" list="datalistOptions" id="estado" placeholder="Estado..." name="estado" >
+                        <input class="form-control" list="datalistOptions" id="estado" placeholder="Estado..." name="estado" required >
                         <datalist id="datalistOptions"  >
                         <option value="Aguascalientes ">Aguascalientes</option>
                         <option value="Baja California ">Baja California</option>
@@ -172,39 +172,11 @@
                         </div>             
                     </div>
                     <!--Esta parte del código actualiza el span al precionar el botón cotizar con el calculo correcto-->
-                    <button type="submit" class="btn btn-secondary" > Cotizar </button>
+                    <button type="submit" class="btn btn-warning" > Cotizar </button>
                     <span>{{$msg}}</span>
 
 
-                    <!-- <input type="submit" value="Cotizar" onclick="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">-->
-                    <!-- <input type="submit" value="Cotizar" >-->
-                    <!-- <span>{{$msg}}</span>-->
-                   
-                   <input type="text" class="form-control" name="msg" value="{{ $msg }}" />
-                     <!-- Button trigger modal -->
-                   <!--<button type="submit" class="btn btn-secondary" id="btnCotizar" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    Cotizar
-                    </button>-->
-  
-                     <!-- Modal -->
-
-                    <!--<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Tu cotización está lista!</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                        {{$msg}}
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-warning">Descargar cotización</button>
-                        </div>
-                        </div>
-                    </div>
-                    </div>-->
+                   <input type="hidden" class="form-control" name="msg" value="{{ $msg }}" />
 
 
         </form>
@@ -214,108 +186,6 @@
         <div id="result"></div>
 
     </body>
-    <script type="text/javascript">  
-       /* var form=document.getElementById('form')
-        form.addEventListener('submit', function(event){
-            event.preventDefault()//revent the form from other submits
-
-            var modalidad=document.getElementById('modalidad').value
-            console.log(modalidad)
-            var tipo=document.getElementById('tipo').value
-            console.log(tipo)
-            var cantidad=document.getElementById('cantidad').value
-            console.log(cantidad)
-            var estado=document.getElementById('estado').value
-            console.log(estado)
-            var msg=$this.data('')
-        
-            console.log(msj)
-
-
-            document.getElementById('result').innerHTML = `
-            <p>Modalidad: ${modalidad}</p>
-            <p>El Tipo: ${tipo}</p>
-          
-
     
-           
-           
-           `
-
-        }) 
-
-    </script>
-    <!--<script  type="text/javascript">
-           /* var alertPlaceholder = document.getElementById('liveAlertPlaceholder')
-            var alertTrigger = document.getElementById('liveAlertBtn')
-
-            function alert(message, type) {
-            var wrapper = document.createElement('div')
-            wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
-
-            alertPlaceholder.append(wrapper)
-            }
-
-            if (alertTrigger) {
-            alertTrigger.addEventListener('click', function () {
-                alert('{{$msg}}', 'success')
-            })
-            }*/
-            $("#btnCotizar").click(
-                function(){
-                    //$("#staticBackdrop").show();
-                    '<h1>hola</h1>'
-                }
-            )
-
-        $("#fr").submit(function(e){
-        e.preventDefault();
-
-        let modalidad = $("#modalidad").val();
-        let tipo = $("#tipo").val();
-        let cantidad = $("#cantidad").val();
-        let estado = $("#estado").val();
-        //let _token = $("input[name=_token]").val();
-
-      
-            //para funcionalidad submit del boton
-  
-
-            $(function() {
-                $('#btnCotizar').on('click', function(e) {
-                    $('#fr').submit();
-                });
-            });
-
-            //solo se activa el boton si los campos son llenado
-            function activarBoton() {
-                if(verificar()) {
-                    btnCotizar.disabled=false
-                }
-                else {
-                    btnCotizar.disabled=true
-                }
-            }
-
-            function verificar() {
-                if( modalidad.value==="" )
-                    return false;
-                if( tipo.value==="" )
-                    return false;
-                if( cantidad.value==="" )
-                    return false;
-                if( estado.value==="" )
-                    return false;
-                return true;
-            }
-
-            var btnCotizar = document.getElementById("btnCotizar");
-            btnCotizar.disabled = true;
-            var modalidad = document.fr.modalidad;
-            var tipo = document.fr.tipo;
-            var cantidad = document.fr.cantidad;
-            var estado = document.fr.estado;
-            modalidad.onkeyup = tipo.onkeyup = cantidad.onkeyup =estado.onkeyup =activarBoton;
-
-	 	</script> -->
 </html>
+

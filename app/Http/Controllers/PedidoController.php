@@ -59,7 +59,10 @@ class PedidoController extends Controller
         //$datosPedido=Pedido::create($request->all());
         $datosPedido=request()->except('_token','amount');
         Pedido::insert($datosPedido);
-        return response()->json($datosPedido);
+        //return response()->json($datosPedido);
+  
+        //return redirect('/pago')->with(compact('datosPedido'));
+        return redirect('pedidos');
     }
 
     /**
